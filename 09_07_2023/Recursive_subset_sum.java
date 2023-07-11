@@ -21,18 +21,25 @@ public class Recursive_subset_sum {
     }
 
     static  void subsetSum(int[] arr, int sum, int n,List<Integer> ls,List<List<Integer>> lst){
-        if(sum==0){
-            lst.add(new ArrayList<>(ls));
-            return;
-        }
+        // if(sum==0){
+        //     lst.add(new ArrayList<>(ls));
+        //     return;
+        // }
         if(n==0){
+            if(sum==0){
+                lst.add(new ArrayList<>(ls));
+                return;
+            }
           return;
         }
 
         if(arr[n-1]<=sum){
             ls.add(arr[n-1]);
             subsetSum(arr,sum-arr[n-1],n-1,ls,lst);
+            ls.remove( ls.size()-1);
+            subsetSum( arr, sum,  n-1, ls,  lst );
         }
-        subsetSum(arr,sum,n-1,ls,lst);
+        else
+           subsetSum(arr,sum,n-1,ls,lst);
     }
 }
